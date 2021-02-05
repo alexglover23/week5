@@ -28,5 +28,33 @@ function forecastHTML(dailyForecast) {
 // You may want to write other functions, but you don't need to!
 // All your code can go inside of this event listener ⬇️ ⬇️ ⬇️ ⬇️ ⬇️
 window.addEventListener('DOMContentLoaded', function() {
-  // Your code ...
+  
+  let chicago = document.querySelector('#chicago-forecast')
+  chicago.addEventListener('click', async function(event){
+    event.preventDefault()
+    
+    let location = 'Chicago'
+    let forecastHeader = document.querySelector('.forecast-header')
+    forecastHeader.innerHTML = `${location} Forecast`
+    
+    let response = await fetch('https://api.weatherapi.com/v1/forecast.json?key=4498add9fff045f6bb873226212701&q=LOCATION&days=3')
+    // console.log(response)
+    let json = await response.json()
+    console.log(json)
+
+    let forecast = json.forecast.forecastday
+    for (let i = 0; i < forecast.length; i++) {
+      console.log(forecast[i])
+    }
+
+
+    // let amount = document.querySelector('#amount').value 
+    // let rate = json.bpi.USD.rate_float
+    // let convertedAmount = amount * rate
+
+    // let outputElement = document.querySelector('.output')
+    // outputElement.innerHTML = `Your ${amount} Bitcoin is worth ${convertedAmount}`
+
+  })
+
 })
